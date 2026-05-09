@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import logo from "@/assets/logo.png";
 import { navMenus } from "@/lib/cms-data";
 
@@ -11,10 +12,10 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 glass">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center gap-2.5">
           <img src={logo} alt="Mango Stack AI" width={36} height={36} className="rounded-md" />
           <span className="text-base font-semibold tracking-tight">Mango Stack AI</span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-1 lg:flex">
           {Object.entries(navMenus).map(([label, items]) => (
@@ -39,14 +40,15 @@ export function Navbar() {
                   >
                     <div className="glass min-w-[260px] rounded-xl p-2 shadow-[var(--shadow-card)]">
                       {items.map((it) => (
-                        <a
+                        <Link
                           key={it.label}
-                          href={it.href}
+                          to={it.href as never}
                           className="block rounded-lg px-3 py-2.5 transition hover:bg-secondary"
+                          onClick={() => setOpen(null)}
                         >
                           <div className="text-sm font-medium">{it.label}</div>
                           <div className="text-xs text-muted-foreground">{it.desc}</div>
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </motion.div>
@@ -54,19 +56,28 @@ export function Navbar() {
               </AnimatePresence>
             </div>
           ))}
-          <a href="#resources" className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground">
-            Resource Center
-          </a>
+          <Link
+            to="/services"
+            className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
+          >
+            Services
+          </Link>
+          <Link
+            to="/about"
+            className="rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground"
+          >
+            About
+          </Link>
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href="#demo"
-            className="hidden rounded-lg bg-[var(--gradient-primary)] px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition hover:scale-[1.03] sm:inline-block"
+          <Link
+            to="/contact"
+            className="hidden rounded-lg px-4 py-2 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition hover:scale-[1.03] sm:inline-block"
             style={{ background: "var(--gradient-primary)" }}
           >
             Request Demo
-          </a>
+          </Link>
           <button className="lg:hidden" onClick={() => setMobile(!mobile)} aria-label="Menu">
             {mobile ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -86,12 +97,41 @@ export function Navbar() {
                 <div key={label}>
                   <div className="px-2 py-2 text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
                   {items.map((it) => (
-                    <a key={it.label} href={it.href} className="block rounded-md px-2 py-2 text-sm hover:bg-secondary">
+                    <Link
+                      key={it.label}
+                      to={it.href as never}
+                      className="block rounded-md px-2 py-2 text-sm hover:bg-secondary"
+                      onClick={() => setMobile(false)}
+                    >
                       {it.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               ))}
+              <div className="border-t border-border pt-3 mt-2">
+                <Link
+                  to="/services"
+                  className="block rounded-md px-2 py-2 text-sm hover:bg-secondary"
+                  onClick={() => setMobile(false)}
+                >
+                  Services
+                </Link>
+                <Link
+                  to="/about"
+                  className="block rounded-md px-2 py-2 text-sm hover:bg-secondary"
+                  onClick={() => setMobile(false)}
+                >
+                  About
+                </Link>
+                <Link
+                  to="/contact"
+                  className="mt-2 block rounded-lg px-4 py-2.5 text-center text-sm font-semibold text-primary-foreground"
+                  style={{ background: "var(--gradient-primary)" }}
+                  onClick={() => setMobile(false)}
+                >
+                  Request Demo
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
