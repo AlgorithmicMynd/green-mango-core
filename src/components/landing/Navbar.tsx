@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-mark.png";
 import { navMenus } from "@/lib/cms-data";
 
 export function Navbar() {
@@ -13,7 +13,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 glass">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2.5">
-          <img src={logo} alt="Mango Stack AI" width={36} height={36} className="rounded-md" />
+          <img src={logo} alt="" aria-hidden width={36} height={36} className="rounded-md" />
           <span className="text-base font-semibold tracking-tight">Mango Stack AI</span>
         </Link>
 
@@ -95,7 +95,9 @@ export function Navbar() {
             <div className="space-y-1 px-6 py-4">
               {Object.entries(navMenus).map(([label, items]) => (
                 <div key={label}>
-                  <div className="px-2 py-2 text-xs uppercase tracking-wider text-muted-foreground">{label}</div>
+                  <div className="px-2 py-2 text-xs uppercase tracking-wider text-muted-foreground">
+                    {label}
+                  </div>
                   {items.map((it) => (
                     <Link
                       key={it.label}

@@ -16,20 +16,42 @@ import {
 import { PageShell } from "@/components/PageShell";
 import { PageHero } from "@/components/PageHero";
 import { contactHero, contactDetails, contactReasons } from "@/lib/cms-data";
+import { breadcrumbSchema, buildSeo, webPageSchema } from "@/lib/seo";
+
+const title = "Contact Mango Stack AI | Start an AI, Automation or Software Project";
+const description =
+  "Contact Mango Stack AI for custom software, AI integration, automation, and digital marketing projects. We typically respond within 24 hours.";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
-  head: () => ({
-    meta: [
-      { title: "Contact Us — Mango Stack AI" },
-      {
-        name: "description",
-        content:
-          "Get in touch with Mango Stack AI. Reach out for custom software, AI solutions, automation, or digital marketing enquiries.",
-      },
-      { property: "og:title", content: "Contact — Mango Stack AI" },
-    ],
-  }),
+  head: () =>
+    buildSeo({
+      title,
+      description,
+      path: "/contact",
+      keywords: [
+        "contact Mango Stack AI",
+        "AI project consultation",
+        "custom software consultation",
+        "automation consultation",
+        "digital marketing consultation",
+      ],
+      schema: [
+        webPageSchema("/contact", title, description, "ContactPage"),
+        {
+          "@context": "https://schema.org",
+          "@type": "ContactPoint",
+          contactType: "sales",
+          email: contactDetails.email,
+          telephone: contactDetails.phone,
+          availableLanguage: ["English", "Hindi"],
+        },
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ]),
+      ],
+    }),
 });
 
 const iconMap: Record<string, LucideIcon> = { Brain, Code2, Globe, Megaphone, MessageCircle, Zap };
@@ -107,7 +129,10 @@ function ContactPage() {
                 <form onSubmit={handleSubmit} className="mt-7 space-y-4">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
-                      <label className="mb-1.5 block text-xs font-medium text-muted-foreground" htmlFor="contact-name">
+                      <label
+                        className="mb-1.5 block text-xs font-medium text-muted-foreground"
+                        htmlFor="contact-name"
+                      >
                         Full Name
                       </label>
                       <input
@@ -119,7 +144,10 @@ function ContactPage() {
                       />
                     </div>
                     <div>
-                      <label className="mb-1.5 block text-xs font-medium text-muted-foreground" htmlFor="contact-company">
+                      <label
+                        className="mb-1.5 block text-xs font-medium text-muted-foreground"
+                        htmlFor="contact-company"
+                      >
                         Company
                       </label>
                       <input
@@ -131,7 +159,10 @@ function ContactPage() {
                     </div>
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground" htmlFor="contact-email">
+                    <label
+                      className="mb-1.5 block text-xs font-medium text-muted-foreground"
+                      htmlFor="contact-email"
+                    >
                       Email Address
                     </label>
                     <input
@@ -143,7 +174,10 @@ function ContactPage() {
                     />
                   </div>
                   <div>
-                    <label className="mb-1.5 block text-xs font-medium text-muted-foreground" htmlFor="contact-message">
+                    <label
+                      className="mb-1.5 block text-xs font-medium text-muted-foreground"
+                      htmlFor="contact-message"
+                    >
                       Message
                     </label>
                     <textarea
@@ -216,8 +250,8 @@ function ContactPage() {
               <p className="text-xs uppercase tracking-[0.22em] text-primary">Availability</p>
               <h3 className="mt-3 text-2xl font-bold">We work globally.</h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                Our team is available across time zones. Whether you're in India, the US, Europe, or beyond —
-                we'll find a time that works for both of us.
+                Our team is available across time zones. Whether you're in India, the US, Europe, or
+                beyond — we'll find a time that works for both of us.
               </p>
               <div className="mt-6 space-y-3">
                 {[
@@ -225,7 +259,10 @@ function ContactPage() {
                   { region: "US Clients", tz: "EST / PST — flexible" },
                   { region: "Europe", tz: "CET — flexible" },
                 ].map(({ region, tz }) => (
-                  <div key={region} className="flex items-center justify-between rounded-lg border border-border bg-background/40 px-4 py-2.5">
+                  <div
+                    key={region}
+                    className="flex items-center justify-between rounded-lg border border-border bg-background/40 px-4 py-2.5"
+                  >
                     <span className="text-sm font-medium">{region}</span>
                     <span className="text-xs text-muted-foreground">{tz}</span>
                   </div>

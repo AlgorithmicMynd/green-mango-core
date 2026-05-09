@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/logo-mark.png";
 
 export function CTA() {
   return (
@@ -23,13 +23,16 @@ export function CTA() {
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition hover:scale-[1.04]"
               style={{ background: "var(--gradient-primary)" }}
             >
               Request a Demo <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="#contact" className="rounded-lg border border-border bg-background/40 px-6 py-3 text-sm font-semibold transition hover:scale-[1.04] hover:border-primary/50">
+            <a
+              href="/contact"
+              className="rounded-lg border border-border bg-background/40 px-6 py-3 text-sm font-semibold transition hover:scale-[1.04] hover:border-primary/50"
+            >
               Talk to Sales
             </a>
           </div>
@@ -44,11 +47,12 @@ export function Footer() {
     <footer className="border-t border-border">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-10 md:flex-row">
         <div className="flex items-center gap-2.5">
-          <img src={logo} alt="Mango Stack AI" width={28} height={28} className="rounded-md" />
+          <img src={logo} alt="" aria-hidden width={28} height={28} className="rounded-md" />
           <span className="text-sm font-semibold">Mango Stack AI</span>
         </div>
         <p className="text-xs text-muted-foreground">
-          © {new Date().getFullYear()} Mango Stack AI. Software Solutions · Automation · AI · Digital Marketing.
+          © {new Date().getFullYear()} Mango Stack AI. Software Solutions · Automation · AI ·
+          Digital Marketing.
         </p>
       </div>
     </footer>

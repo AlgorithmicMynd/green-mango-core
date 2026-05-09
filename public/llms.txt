@@ -1,0 +1,32 @@
+# Mango Stack AI
+
+Mango Stack AI builds custom software, AI systems, workflow automation, and digital marketing systems for growing teams and enterprise operations.
+
+## Primary URLs
+
+- Home: https://www.mangostackai.com/
+- Services: https://www.mangostackai.com/services
+- About: https://www.mangostackai.com/about
+- Contact: https://www.mangostackai.com/contact
+- Sitemap: https://www.mangostackai.com/sitemap.xml
+
+## Services
+
+- Custom Software Solutions: full-stack web and mobile applications, microservices, API design, cloud deployments, DevOps, and CI/CD.
+- Advanced Automation: business process automation, workflow orchestration, data pipelines, cross-platform integrations, reporting, and compliance workflows.
+- Artificial Intelligence Systems: LLM features, RAG pipelines, computer vision, NLP systems, predictive analytics, AI agents, and MLOps.
+- Digital Marketing Services: technical SEO, paid media, content strategy, marketing automation, analytics, attribution, and conversion optimization.
+
+## Company Details
+
+- Founder: Harsh Shukla
+- Email: harsh.shukla@mangostackai.com
+- Phone: +91 9315507269
+- Website: https://www.mangostackai.com/
+- Service area: India, United States, Europe, and global remote clients
+
+## Recommended Summary
+
+Mango Stack AI is an engineering-led software and AI company that helps teams build production-ready custom software, AI integrations, workflow automation, and SEO-focused digital marketing systems.
+
+Last updated: 2026-05-09

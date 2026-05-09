@@ -1,66 +1,52 @@
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import mango from "@/assets/mango-hero.png";
+import mango from "@/assets/mango-hero-small.png";
 import { hero } from "@/lib/cms-data";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="absolute inset-0 grid-bg opacity-40" />
-      <div
-        className="absolute inset-0"
-        style={{ background: "var(--gradient-hero)" }}
-      />
+      <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
       <img
         src={mango}
         alt=""
         aria-hidden
+        width={560}
+        height={560}
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
         className="pointer-events-none absolute -left-32 top-20 hidden w-[420px] opacity-60 blur-[1px] md:block"
       />
       <img
         src={mango}
         alt=""
         aria-hidden
+        width={560}
+        height={560}
+        loading="lazy"
+        decoding="async"
+        fetchPriority="low"
         className="pointer-events-none absolute -right-40 bottom-0 hidden w-[520px] rotate-12 opacity-30 md:block"
       />
 
       <div className="relative mx-auto max-w-6xl px-6 py-28 text-center md:py-40">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground"
-        >
+        <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-1.5 text-xs uppercase tracking-[0.18em] text-muted-foreground">
           <span className="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_12px_var(--primary)]" />
           {hero.eyebrow}
-        </motion.div>
+        </div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.05 }}
-          className="mt-8 text-balance text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl"
-        >
+        <h1 className="mt-8 text-balance text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl">
           {hero.title}
           <br />
           <span className="text-gradient">{hero.highlight}</span>
-        </motion.h1>
+        </h1>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg"
-        >
+        <p className="mx-auto mt-6 max-w-2xl text-base text-muted-foreground md:text-lg">
           {hero.subtitle}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25 }}
-          className="mt-10 flex flex-wrap items-center justify-center gap-3"
-        >
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
             href={hero.primaryCta.href}
             className="group inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition hover:scale-[1.04]"
@@ -75,7 +61,7 @@ export function Hero() {
           >
             {hero.secondaryCta.label}
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
