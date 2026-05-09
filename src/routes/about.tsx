@@ -1,38 +1,50 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import {
-  Globe,
-  Handshake,
-  Mail,
-  Phone,
-  Shield,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
-import harshPhoto from "@/assets/Harsh-Shukla-Img.jpeg";
+import { Globe, Handshake, Mail, Phone, Shield, Zap, type LucideIcon } from "lucide-react";
+import harshPhoto from "@/assets/harsh-shukla-profile.jpg";
 import { PageShell } from "@/components/PageShell";
 import { PageHero } from "@/components/PageHero";
-import {
-  aboutHero,
-  aboutMission,
-  aboutValues,
-  aboutStats,
-  aboutTeam,
-} from "@/lib/cms-data";
+import { aboutHero, aboutMission, aboutValues, aboutStats, aboutTeam } from "@/lib/cms-data";
+import { breadcrumbSchema, buildSeo, webPageSchema } from "@/lib/seo";
+
+const title = "About Mango Stack AI | Engineering-Led AI & Software Company";
+const description =
+  "Meet Mango Stack AI and founder Harsh Shukla, the engineering-led team building AI, automation, and software systems for ambitious businesses.";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
-  head: () => ({
-    meta: [
-      { title: "About Us — Mango Stack AI" },
-      {
-        name: "description",
-        content:
-          "Learn about Mango Stack AI — our mission, values, and the team behind enterprise-grade AI and automation solutions.",
-      },
-      { property: "og:title", content: "About Us — Mango Stack AI" },
-    ],
-  }),
+  head: () =>
+    buildSeo({
+      title,
+      description,
+      path: "/about",
+      keywords: [
+        "about Mango Stack AI",
+        "AI software company",
+        "Harsh Shukla",
+        "AI automation team",
+        "engineering-led software company",
+      ],
+      schema: [
+        webPageSchema("/about", title, description, "AboutPage"),
+        {
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: aboutTeam.lead.name,
+          jobTitle: aboutTeam.lead.role,
+          email: aboutTeam.lead.contact,
+          telephone: aboutTeam.lead.phone,
+          worksFor: {
+            "@type": "Organization",
+            name: "Mango Stack AI",
+          },
+        },
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ]),
+      ],
+    }),
 });
 
 const iconMap: Record<string, LucideIcon> = { Globe, Handshake, Shield, Zap };
@@ -75,7 +87,9 @@ function AboutPage() {
           <div className="absolute inset-0 grid-bg opacity-20" />
           <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
           <div className="relative">
-            <p className="text-xs uppercase tracking-[0.22em] text-primary">{aboutMission.headline}</p>
+            <p className="text-xs uppercase tracking-[0.22em] text-primary">
+              {aboutMission.headline}
+            </p>
             <p className="mt-5 text-xl leading-relaxed text-foreground/90 md:text-2xl">
               "{aboutMission.body}"
             </p>
@@ -93,9 +107,7 @@ function AboutPage() {
           className="text-center"
         >
           <p className="text-xs uppercase tracking-[0.22em] text-primary">Our Values</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
-            What we stand for
-          </h2>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">What we stand for</h2>
         </motion.div>
         <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
           {aboutValues.map((val, i) => {
@@ -132,7 +144,9 @@ function AboutPage() {
           className="text-center"
         >
           <p className="text-xs uppercase tracking-[0.22em] text-primary">{aboutTeam.headline}</p>
-          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">The person behind it</h2>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+            The person behind it
+          </h2>
         </motion.div>
 
         <motion.div
@@ -148,6 +162,10 @@ function AboutPage() {
                 <img
                   src={harshPhoto}
                   alt="Harsh Shukla"
+                  width={96}
+                  height={96}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full rounded-full object-cover"
                 />
               </div>
@@ -155,7 +173,9 @@ function AboutPage() {
             <div>
               <h3 className="text-2xl font-bold">{aboutTeam.lead.name}</h3>
               <p className="mt-1 text-sm font-medium text-primary">{aboutTeam.lead.role}</p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{aboutTeam.lead.bio}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                {aboutTeam.lead.bio}
+              </p>
               <div className="mt-6 flex flex-col gap-2 text-sm text-muted-foreground md:flex-row md:gap-6">
                 <a
                   href={`mailto:${aboutTeam.lead.contact}`}

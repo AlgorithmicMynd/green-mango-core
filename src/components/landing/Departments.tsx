@@ -49,6 +49,7 @@ export function Departments() {
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{d.description}</p>
               <a
                 href={d.link.href}
+                aria-label={`Learn about ${d.title}`}
                 className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-primary transition group-hover:gap-2.5"
               >
                 {d.link.label}

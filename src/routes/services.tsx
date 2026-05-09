@@ -3,21 +3,44 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, Brain, Code2, Megaphone, Zap, type LucideIcon } from "lucide-react";
 import { PageShell } from "@/components/PageShell";
 import { PageHero } from "@/components/PageHero";
-import { servicesHero, servicesList } from "@/lib/cms-data";
+import { serviceFaqs, servicesHero, servicesList } from "@/lib/cms-data";
+import {
+  breadcrumbSchema,
+  buildSeo,
+  faqSchema,
+  servicesCatalogSchema,
+  webPageSchema,
+} from "@/lib/seo";
+
+const title = "AI Automation, Custom Software & Digital Marketing Services | Mango Stack AI";
+const description =
+  "Explore Mango Stack AI services for custom software development, AI systems, process automation, and SEO-focused digital marketing.";
 
 export const Route = createFileRoute("/services")({
   component: ServicesPage,
-  head: () => ({
-    meta: [
-      { title: "Services — Mango Stack AI" },
-      {
-        name: "description",
-        content:
-          "Custom software, advanced automation, AI systems, and digital marketing services built for enterprise scale.",
-      },
-      { property: "og:title", content: "Services — Mango Stack AI" },
-    ],
-  }),
+  head: () =>
+    buildSeo({
+      title,
+      description,
+      path: "/services",
+      keywords: [
+        "AI automation services",
+        "custom software development services",
+        "AI integration services",
+        "business process automation",
+        "SEO digital marketing services",
+        "Mango Stack AI services",
+      ],
+      schema: [
+        webPageSchema("/services", title, description, "CollectionPage"),
+        servicesCatalogSchema(),
+        faqSchema(),
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+        ]),
+      ],
+    }),
 });
 
 const iconMap: Record<string, LucideIcon> = { Brain, Code2, Megaphone, Zap };
@@ -71,7 +94,9 @@ function ServicesPage() {
               </div>
 
               {/* Icon side */}
-              <div className={`flex items-center justify-center ${isEven ? "" : "lg:[direction:ltr]"}`}>
+              <div
+                className={`flex items-center justify-center ${isEven ? "" : "lg:[direction:ltr]"}`}
+              >
                 <div className="relative flex h-52 w-52 items-center justify-center rounded-3xl border border-border bg-surface-elevated shadow-[var(--shadow-card)]">
                   <div
                     className="absolute inset-0 rounded-3xl opacity-50"
@@ -83,6 +108,26 @@ function ServicesPage() {
             </motion.div>
           );
         })}
+      </section>
+
+      <section className="mx-auto max-w-5xl px-6 pb-28">
+        <div className="text-center">
+          <p className="text-xs uppercase tracking-[0.22em] text-primary">Common Questions</p>
+          <h2 className="mt-3 text-3xl font-bold tracking-tight md:text-4xl">
+            Questions before you start
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-muted-foreground md:text-base">
+            A quick look at how we approach software, AI, automation, and measurable digital growth.
+          </p>
+        </div>
+        <div className="mt-10 grid gap-4 md:grid-cols-2">
+          {serviceFaqs.map((faq) => (
+            <article key={faq.question} className="rounded-2xl border border-border bg-surface p-6">
+              <h3 className="text-lg font-semibold tracking-tight">{faq.question}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{faq.answer}</p>
+            </article>
+          ))}
+        </div>
       </section>
     </PageShell>
   );

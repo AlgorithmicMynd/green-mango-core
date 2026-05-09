@@ -6,31 +6,35 @@ import { Departments } from "@/components/landing/Departments";
 import { FeatureSplit } from "@/components/landing/FeatureSplit";
 import { Testimonials } from "@/components/landing/Testimonials";
 import { CTA, Footer } from "@/components/landing/CTA";
+import { buildSeo, webPageSchema } from "@/lib/seo";
+
+const title = "Mango Stack AI | Custom Software, AI Automation & Digital Marketing";
+const description =
+  "Mango Stack AI builds custom software, AI systems, workflow automation, and digital marketing systems for growing teams and enterprise operations.";
 
 export const Route = createFileRoute("/")({
   component: Index,
-  head: () => ({
-    meta: [
-      { title: "Mango Stack AI — Enterprise-Grade AI & Automation" },
-      {
-        name: "description",
-        content:
-          "Mango Stack AI delivers enterprise-grade AI, automation, and digital marketing solutions engineered to scale across complex organizations.",
-      },
-      { property: "og:title", content: "Mango Stack AI — Enterprise AI & Automation" },
-      {
-        property: "og:description",
-        content: "Scalable AI solutions for engineering, marketing, sales and HR teams.",
-      },
-    ],
-  }),
+  head: () =>
+    buildSeo({
+      title,
+      description,
+      path: "/",
+      keywords: [
+        "Mango Stack AI",
+        "custom software development",
+        "AI automation company",
+        "enterprise AI solutions",
+        "digital marketing agency",
+        "workflow automation",
+      ],
+      schema: webPageSchema("/", title, description, "WebPage"),
+    }),
 });
 
 function Index() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <Navbar />
-      <h1 className="sr-only">Mango Stack AI — Enterprise-Grade AI & Automation</h1>
       <Hero />
       <LogoMarquee />
       <Departments />

@@ -9,20 +9,49 @@ type ServerEntry = {
 
 let serverEntryPromise: Promise<ServerEntry> | undefined;
 
+const securityHeaders = {
+  "Strict-Transport-Security": "max-age=31536000; includeSubDomains; preload",
+  "X-Content-Type-Options": "nosniff",
+  "X-Frame-Options": "DENY",
+  "Referrer-Policy": "strict-origin-when-cross-origin",
+  "Cross-Origin-Opener-Policy": "same-origin",
+  "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+  "Content-Security-Policy":
+    "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data: https:; font-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https: ws: wss:; form-action 'self'",
+};
+
 async function getServerEntry(): Promise<ServerEntry> {
   if (!serverEntryPromise) {
     serverEntryPromise = import("@tanstack/react-start/server-entry").then(
-      (m) => ((m as { default?: ServerEntry }).default ?? (m as unknown as ServerEntry)),
+      (m) => (m as { default?: ServerEntry }).default ?? (m as unknown as ServerEntry),
     );
   }
   return serverEntryPromise;
 }
 
-function brandedErrorResponse(): Response {
-  return new Response(renderErrorPage(), {
-    status: 500,
-    headers: { "content-type": "text/html; charset=utf-8" },
+function withSecurityHeaders(response: Response): Response {
+  const headers = new Headers(response.headers);
+
+  Object.entries(securityHeaders).forEach(([name, value]) => {
+    if (!headers.has(name)) {
+      headers.set(name, value);
+    }
   });
+
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
+
+function brandedErrorResponse(): Response {
+  return withSecurityHeaders(
+    new Response(renderErrorPage(), {
+      status: 500,
+      headers: { "content-type": "text/html; charset=utf-8" },
+    }),
+  );
 }
 
 function isCatastrophicSsrErrorBody(body: string, responseStatus: number): boolean {
@@ -71,7 +100,7 @@ export default {
     try {
       const handler = await getServerEntry();
       const response = await handler.fetch(request, env, ctx);
-      return await normalizeCatastrophicSsrResponse(response);
+      return withSecurityHeaders(await normalizeCatastrophicSsrResponse(response));
     } catch (error) {
       console.error(error);
       return brandedErrorResponse();

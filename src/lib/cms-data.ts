@@ -26,28 +26,28 @@ export const departments = [
     title: "Engineering & Platform",
     description:
       "Production-grade systems, distributed services, and developer-first APIs engineered for scale.",
-    link: { label: "Learn More", href: "/services#software" },
+    link: { label: "Explore Engineering", href: "/services#software" },
   },
   {
     icon: "Megaphone",
     title: "Digital Marketing AI",
     description:
       "Campaign intelligence, audience segmentation, and content automation that compound revenue.",
-    link: { label: "Learn More", href: "/services#marketing" },
+    link: { label: "Explore Marketing", href: "/services#marketing" },
   },
   {
     icon: "TrendingUp",
     title: "Enterprise Sales Solutions",
     description:
       "Pipeline intelligence and CRM integrations that turn signals into closed-won outcomes.",
-    link: { label: "Learn More", href: "/services#automation" },
+    link: { label: "Explore Sales AI", href: "/services#automation" },
   },
   {
     icon: "Users",
     title: "Global HR Solutions",
     description:
       "Talent intelligence, engagement analytics, and workforce automation across geographies.",
-    link: { label: "Learn More", href: "/services#ai" },
+    link: { label: "Explore HR AI", href: "/services#ai" },
   },
 ];
 
@@ -74,8 +74,7 @@ export const testimonials = [
     company: "Global Retailer",
   },
   {
-    quote:
-      "Best-in-class governance and the cleanest developer experience we've seen.",
+    quote: "Best-in-class governance and the cleanest developer experience we've seen.",
     author: "Director of AI",
     company: "Healthcare Leader",
   },
@@ -173,6 +172,34 @@ export const servicesList = [
       "Analytics, attribution & conversion optimisation",
     ],
     cta: { label: "Grow Your Pipeline", href: "/contact" },
+  },
+];
+
+export const serviceFaqs = [
+  {
+    question: "What does Mango Stack AI help businesses build?",
+    answer:
+      "Mango Stack AI helps businesses build custom software, AI systems, workflow automation, data pipelines, integrations, and digital marketing systems that are designed for production use.",
+  },
+  {
+    question: "Can Mango Stack AI integrate AI into existing software?",
+    answer:
+      "Yes. We can integrate AI into existing products and workflows through LLM features, retrieval-augmented generation, predictive analytics, AI agents, and secure API integrations.",
+  },
+  {
+    question: "Do you offer business process automation?",
+    answer:
+      "Yes. We design automation for repetitive operations such as reporting, CRM updates, data movement, lead routing, compliance workflows, and cross-platform handoffs.",
+  },
+  {
+    question: "Does Mango Stack AI provide SEO and digital marketing services?",
+    answer:
+      "Yes. Our digital marketing work includes technical SEO, content strategy, paid media, analytics, attribution, marketing automation, and conversion optimization.",
+  },
+  {
+    question: "Who is a good fit for Mango Stack AI?",
+    answer:
+      "We are a good fit for founders, growing teams, and enterprise operators who need reliable software delivery, AI implementation, automation, or measurable digital growth.",
   },
 ];
 
