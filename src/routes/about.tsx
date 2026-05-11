@@ -122,7 +122,7 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* Leadership */}
+      {/* Leadership 
       <section id="careers" className="mx-auto max-w-7xl px-6 pb-28">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -174,6 +174,7 @@ function AboutPage() {
           </div>
         </motion.div>
       </section>
+      */}
     </PageShell>
   );
 }

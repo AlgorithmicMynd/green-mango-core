@@ -16,6 +16,7 @@ import {
 import { PageShell } from "@/components/PageShell";
 import { PageHero } from "@/components/PageHero";
 import { contactHero, contactDetails, contactReasons } from "@/lib/cms-data";
+import { database, ref, push } from "@/lib/firebase";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -38,9 +39,30 @@ function ContactPage() {
   const [selected, setSelected] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    try {
+      const formData = new FormData(e.currentTarget);
+      const data = {
+        name: formData.get("name"),
+        company: formData.get("company"),
+        email: formData.get("email"),
+        message: formData.get("message"),
+        interest: selected || "General Enquiry",
+        submittedAt: new Date().toISOString(),
+      };
+      
+      await push(ref(database, "contacts"), data);
+      setSubmitted(true);
+    } catch (error) {
+      console.error("Error submitting form: ", error);
+      alert("Something went wrong. Please try again or email us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -112,6 +134,7 @@ function ContactPage() {
                       </label>
                       <input
                         id="contact-name"
+                        name="name"
                         type="text"
                         required
                         placeholder="Harsh Shukla"
@@ -124,6 +147,7 @@ function ContactPage() {
                       </label>
                       <input
                         id="contact-company"
+                        name="company"
                         type="text"
                         placeholder="Mango Stack AI"
                         className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-muted-foreground/50 outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition"
@@ -136,6 +160,7 @@ function ContactPage() {
                     </label>
                     <input
                       id="contact-email"
+                      name="email"
                       type="email"
                       required
                       placeholder="you@company.com"
@@ -148,6 +173,7 @@ function ContactPage() {
                     </label>
                     <textarea
                       id="contact-message"
+                      name="message"
                       required
                       rows={5}
                       placeholder="Tell us about your project or challenge…"
@@ -156,10 +182,11 @@ function ContactPage() {
                   </div>
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center gap-2 rounded-lg py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition hover:scale-[1.02]"
+                    disabled={isSubmitting}
+                    className="flex w-full items-center justify-center gap-2 rounded-lg py-3 text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)] transition hover:scale-[1.02] disabled:opacity-50 disabled:hover:scale-100"
                     style={{ background: "var(--gradient-primary)" }}
                   >
-                    Send Message <Send className="h-4 w-4" />
+                    {isSubmitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
                   </button>
                 </form>
               </>

@@ -247,10 +247,10 @@ export const contactHero = {
 };
 
 export const contactDetails = {
-  email: "harsh.shukla@mangostackai.com",
-  phone: "+91 9315507269",
+  email: "enquiry@mangostackai.com",
+  phone: "+91 9289284168",
   website: "www.mangostackai.com",
-  responseTime: "We typically respond within 24 hours.",
+  responseTime: "We typically respond within 24-48 hours.",
 };
 
 export const contactReasons = [
